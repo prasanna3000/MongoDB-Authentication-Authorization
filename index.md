@@ -18,7 +18,7 @@ security:
 
 After creating/editing this file. Shut down the MongoDb and start again. When it starts, it asks for Authentication.
 So be sure to create users before enabling the security flag.
-To shut down the Mongodb `mongo admin --port 27001 --eval "db.shitdownServer()"`
+To shut down the Mongodb `mongo admin --port 27001 --eval "db.shutdownServer()"`
 
 2. Update the Configuration
 `mongod -f mongod.conf`
