@@ -49,8 +49,13 @@ To handle this deadlock situation there is localhost rule that will allow to cre
  4. If we try to create a new user, it throws error at this instant
 
 ## Authenticate the admin user
-`db.auth("globalAdminUser", "<password_that_was_set>")`
+1. `mongo` or `mongo --port <mongoDB port>` or along with any other flags as required
+then
+2. `use admin`
+3. `db.auth("globalAdminUser", "<password_that_was_set>")`
 it should return 1
+#### or 
+`mongo admin --port 27000 --username 'globalAdminUser' --password '<password_that_was_set>'`
 
 ## To create a user with cluster related permissions
 This is very powerful and is available only with admin database
@@ -63,7 +68,10 @@ db.createUser({
   ]
 })
 ```
-when clicked enter, it should show success response along with given username, role
+when clicked enter, it should show success response along with given username, role.
+
+#### check the available users: 
+`db.getUsers()`
 
 #### Required Access
 1. To create a new user in a database, you must have the `createUser` action on that database resource.
@@ -92,4 +100,54 @@ Note: MongoDB provide 15 built in roles for role-based access control
 - User can use them or define new privileges to grant minimum access also called `Principle of Least Privilege`
 ### Least Privilege Principle
 `The principle of Least Privege says that the users should have the least privilege required for their intended purpose`
+
+Built-In Role: userAdmin
+This role grants the following privileges:
+- changeCustomData
+- changePassword
+- createRole
+- createUser
+- dropRole
+- dropUser
+- grantRole
+- revokeRole
+- setAuthenticationRestriction
+- viewRole
+- viewUser
+
+## User-Defined Roles
+We can create custom roles and give access to selected privileges as below.
+```
+db.createRole({
+  role: "grantRevokeViewRolesAnyDatabase",
+  privileges: [
+    {
+      resource: {db: "", collection: ""},
+      actions: ["grantRole, revokeRole, viewRole"],
+    },
+  ],
+  roles: [],
+})
+```
+- here if db: "some collection" and collection: "", it gives the privileges on all collections inside this database
+- roles: [] is given here, but we can give built-in roles as well. This will create a hybrid role with the privileges of built-in roles privileges and the privileges we provided
+- Another Example to create a role with `find` and `insert` privileges over the `transactions` database
+```
+db.createRole({
+  role: "insertAndFindTransactions",
+  privileges: [
+    {
+      resource:{db: "transactions", collection: ""},
+      actions: ["find", "insert"]
+     },
+  ],
+  roles: [],
+})
+```
+
+#### Check the available roles
+`db.getRoles()`
+
+**Note:** The roles can be created only by the user with createRole access, ensure that before running the above command to avoid errors
+
 
