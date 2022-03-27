@@ -13,7 +13,7 @@ systemLog:
 processManagement:
   fork: true
 security:
-  authorization: enable(enables both authorization and authentication)
+  authorization: enabled(enables both authorization and authentication)
 ```
 
 After creating/editing this file. Shut down the MongoDb and start again. When it starts, it asks for Authentication.
