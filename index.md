@@ -101,7 +101,7 @@ Note: MongoDB provide 15 built in roles for role-based access control
 ### Least Privilege Principle
 `The principle of Least Privege says that the users should have the least privilege required for their intended purpose`
 
-Built-In Role: userAdmin
+**Built-In Role: userAdmin** <br>
 This role grants the following privileges:
 - changeCustomData
 - changePassword
@@ -129,7 +129,7 @@ db.createRole({
   roles: [],
 })
 ```
-- here if db: "some collection" and collection: "", it gives the privileges on all collections inside this database
+- here if db: "<database_name>" and collection: "", it gives the privileges on all collections inside the specified database
 - roles: [] is given here, but we can give built-in roles as well. This will create a hybrid role with the privileges of built-in roles privileges and the privileges we provided
 - Another Example to create a role with `find` and `insert` privileges over the `transactions` database
 ```
