@@ -1,3 +1,7 @@
+![Green White And Blue Earth Day Textured Illustration Banner (Landscape)](https://user-images.githubusercontent.com/60538942/160297488-4efd6cb9-fc99-4db5-8699-de1e3f2c93ed.png)
+
+
+
 # Setup Authentication
 1. Create or Edit mongod.conf
 ```
