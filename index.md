@@ -22,7 +22,8 @@ security:
 
 After creating/editing this file. Shut down the MongoDb and start again. When it starts, it asks for Authentication.
 So be sure to create users before enabling the security flag.
-To shut down the Mongodb `mongo admin --port 27001 --eval "db.shutdownServer()"`
+
+To shut down the Mongodb `mongo admin --port 27001 --eval "db.shutdownServer()"` or navigate to `admin` database and run `db.shutdownServer()`
 
 2. Update the Configuration
 `mongod -f mongod.conf`
@@ -230,3 +231,10 @@ rs.initiate({
 })
 ```
 ## x509: An Alternative to SCRAM
+This requires certificates as the credential. These are the files that are primarily used to enable Transport Layer Security(TLS) between two servers.
+TLS encrypts data sent over the network, so outsiders cannot read it.
+
+### x509 Internal Authentication
+- Each server will have an x509 certificate which will be used to authenticate to the other member
+- This is also used for encryption between each member of replica set
+
